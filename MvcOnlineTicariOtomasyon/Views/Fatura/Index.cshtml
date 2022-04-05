@@ -1,0 +1,85 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<Faturalar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2>Faturalar</h2>
+
+<table class="table table-bordered" style="margin-top:35px">
+    <tr>
+        <th>ID</th>
+        <th>Seri/Sıra No</th>
+        <th>Vergi Dairesi</th>
+        <th>Tarih</th>
+        <th>Saat</th>
+        <th>Teslim Eden</th>
+        <th>Teslim Alan</th>
+        <th>Toplam Tutar</th>
+        <th>Güncelle</th>
+        <th>Detaylar</th>
+        <th>Yeni Kalem</th>
+    </tr>
+    @foreach (var k in Model)
+    {
+        <tr>
+            <td>@k.FaturaID</td>
+            <td> @k.FaturaSeriNo @k.FaturaSıraNo</td>
+            <td> @k.VergiDairesi</td>
+            <td> @Convert.ToDateTime(k.Tarih).ToString("dd/MM/yyyyy")</td>
+            <td> @k.Saat</td>
+            <td> @k.TeslimEden</td>
+            <td> @k.TeslimAlan</td>
+            <td>@k.Toplam</td>
+            <td><a href="/Fatura/FaturaGetir/@k.FaturaID" class="btn btn-outline-default" style="background-color:cadetblue">Güncelle</a></td>
+            <td><a href="/Fatura/FaturaDetay/@k.FaturaID" class="btn btn-outline-default" style="background-color:olive">Detaylar</a></td>
+            <td><a href="/Fatura/FaturaDetay/@k.FaturaID" class="btn btn-outline-default" style="background-color:darksalmon">Kalem</a></td>
+        </tr>
+    }
+
+
+</table>
+<a href="/Fatura/FaturaEkle" class="btn btn-info">Yeni Fatura Girişi</a>
+<br />
+<br />
+<button type="button" class="btn btn-warning"  data-toggle="modal" data-target="#Modal1">Popup Fatura</button>
+
+<div class="modal" id="Modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Faturalar</h2>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <td><strong>Seri No</strong></td>
+                        <td><strong>Sıra No</strong></td>
+                        <td><strong>Vergi Dairesi</strong></td>
+                        @*<td><strong>Tarih</strong></td>*@
+                        <td><strong>Teslim Eden</strong></td>
+                        <td><strong>Teslim Alan</strong></td>
+                        <td><strong>Toplam</strong></td>
+                    </tr>
+                    @foreach (var x in Model)
+                    {
+                        <tr>
+                            <td>@x.FaturaSeriNo</td>
+                            <td>@x.FaturaSıraNo</td>
+                            <td>@x.VergiDairesi</td>
+                            @*<td>@Convert.ToDateTime(x.Tarih).ToString("dd/MM/yyyy")</td>*@
+                            <td>@x.TeslimEden</td>
+                            <td>@x.TeslimAlan</td>
+                            <td>@x.Toplam</td>
+                        </tr>
+                    }
+                </table>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Tamam</button>
+                <a href="/Fatura/FaturaEkle" class="btn btn-danger">Yeni Fatura Girişi</a>
+            </div>
+        </div>
+    </div>
+</div>
+

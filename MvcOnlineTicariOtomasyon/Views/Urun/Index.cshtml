@@ -1,0 +1,46 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar;
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<Urun>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<h2>Ürün Listesi</h2>
+<br />
+
+<table class="table table-bordered">
+
+    <tr>
+        <th>#</th>
+        <th>ÜRÜN</th>
+        <th>MARKA</th>
+        <th>STOK</th>
+        <th>ALIŞ FİYATI</th>
+        <th>SATIŞ FİYATI</th>
+        <th>KATEGORİ</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+    </tr>
+    @foreach (var u in Model)
+    {
+<tr>
+    <td>@u.UrunID</td>
+    <td>@u.UrunAd</td>
+    <td>@u.Marka</td>
+    <td>@u.Stok</td>
+    <td>@u.AlisFiyati ₺</td>
+    <td>@u.SatisFiyati ₺</td>
+    <td>@u.Kategori.KategoriAd</td>
+    <td> <a href="/Urun/UrunSil/@u.UrunID" class="btn btn-danger">Sil</a> </td>
+    <td> <a href="/Urun/UrunGetir/@u.UrunID" class="btn btn-success">Güncelle</a> </td>
+
+</tr>
+    }
+
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa1 => Url.Action("Index", new {sayfa1}))
+<a href="/Urun/YeniUrun/" class="btn btn-info">Yeni Ürün</a>
+

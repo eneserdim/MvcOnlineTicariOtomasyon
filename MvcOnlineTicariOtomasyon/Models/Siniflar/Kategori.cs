@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
+
+namespace MvcOnlineTicariOtomasyon.Models.Siniflar
+{
+    public class Kategori
+    {
+        [Key] //Hemen altındaki propu birincil anahtar yapar.
+        public int KategoriID { get; set; }
+
+        [Column(TypeName = "Varchar")]
+        [StringLength(50)]
+        public string KategoriAd { get; set; }
+        public ICollection<Urun> Ürüns { get; set; }  //Bire çok kullanımda kullanılır.
+    }
+
+
+}
